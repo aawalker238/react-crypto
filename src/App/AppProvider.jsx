@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import { pull, includes } from 'lodash';
 const cc = require('cryptocompare');
 
 export const AppContext = React.createContext();
@@ -10,7 +10,7 @@ class AppProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'settings',
+      page: 'dashboard',
       favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
       ...this.savedSettings(),
       setPage: this.setPage,
@@ -37,6 +37,7 @@ class AppProvider extends Component {
   fetchPrices = async () => {
     if (this.state.firstVisit) return;
     let prices = await this.prices();
+    console.log('prices', prices);
     this.setState({ prices });
   };
 
@@ -50,6 +51,7 @@ class AppProvider extends Component {
         console.warn('Fetch price error:', err);
       }
     }
+    console.log('returnData:', returnData);
     return returnData;
   };
 
@@ -63,11 +65,11 @@ class AppProvider extends Component {
 
   removeCoin = key => {
     let favorites = [...this.state.favorites];
-    this.setState({ favorites: _.pull(favorites, key) });
+    this.setState({ favorites: pull(favorites, key) });
   };
 
   isInFavorites = key => {
-    return _.includes(this.state.favorites, key);
+    return includes(this.state.favorites, key);
   };
 
   confirmFavorites = () => {

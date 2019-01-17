@@ -1,15 +1,23 @@
 import React from 'react';
+import GridLoader from 'react-spinners/GridLoader';
 import { AppContext } from '../App/AppProvider';
+
+const override = `
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: 20%;
+`;
 
 const Context = props => {
   return (
     <AppContext.Consumer>
       {({ coinList, prices, firstVisit }) => {
         if (!coinList) {
-          return <div>Loading Coins...</div>;
+          return <GridLoader css={override} color="#ffffff" size={70} />;
         }
         if (!firstVisit && !prices) {
-          return <div>Loading Prices...</div>;
+          return <GridLoader css={override} color="#ffffff" size={70} />;
         }
         return <div>{props.children}</div>;
       }}

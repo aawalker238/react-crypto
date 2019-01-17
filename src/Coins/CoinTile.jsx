@@ -4,6 +4,10 @@ import { SelectableTile, DeletableTile, DisabledTile } from '../Shared/Tile';
 import CoinHeaderGrid from './CoinHeaderGrid';
 import CoinImage from '../Shared/CoinImage';
 
+const overrideTile = {
+  display: 'grid'
+};
+
 function clickCoinHandler(topSection, coinKey, addCoin, removeCoin) {
   return topSection
     ? () => {
@@ -27,6 +31,7 @@ const CoinTile = ({ coinKey, topSection }) => {
         }
         return (
           <TileClass
+            style={overrideTile}
             onClick={clickCoinHandler(topSection, coinKey, addCoin, removeCoin)}
           >
             <CoinHeaderGrid
@@ -34,7 +39,7 @@ const CoinTile = ({ coinKey, topSection }) => {
               name={coin.CoinName}
               symbol={coin.Symbol}
             />
-            <CoinImage coin={coin} />
+            <CoinImage centered coin={coin} />
           </TileClass>
         );
       }}

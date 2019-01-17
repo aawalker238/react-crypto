@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { SelectableTile } from '../Shared/Tile';
 import { fontSize3, fontSizeBig } from '../Shared/Styles';
-import { CoinHeaderGridStyled } from '../Settings/CoinHeaderGrid';
+import { CoinHeaderGridStyled } from '../Coins/CoinHeaderGrid';
 import { numberFormatter } from '../utils/helpers';
 import { AppContext } from '../App/AppProvider';
 

@@ -6,6 +6,11 @@ const Logo = styled.div`
   font-size: 1.5em;
 `;
 
+const LogoBigFont = styled.span`
+  font-size: 1.8em;
+  color: #42ff3a;
+`;
+
 const Bar = styled.div`
   display: grid;
   margin-bottom: 40px;
@@ -14,10 +19,12 @@ const Bar = styled.div`
 
 const ControlButtonElem = styled.div`
   cursor: pointer;
+  text-align: center;
+  max-height: 25px;
   ${props =>
     props.active &&
     css`
-      text-shadow: 0px 0px 60px #03ff03;
+      border-bottom: 3px solid #03ff03;
     `}
   ${props =>
     props.hidden &&
@@ -49,10 +56,14 @@ const ControlButton = ({ name }) => {
 const AppBar = () => {
   return (
     <Bar>
-      <Logo>Cryptodash</Logo>
+      <Logo>
+        Cryptos
+        <LogoBigFont>"R"</LogoBigFont>
+        Us
+      </Logo>
       <div />
       <ControlButton active name="dashboard" />
-      <ControlButton name="settings" />
+      <ControlButton name="coins" />
     </Bar>
   );
 };

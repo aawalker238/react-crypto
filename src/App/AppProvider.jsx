@@ -24,7 +24,10 @@ class AppProvider extends Component {
       isInFavorites: this.isInFavorites,
       setFilteredCoins: this.setFilteredCoins,
       setCurrentFavorite: this.setCurrentFavorite,
-      changeChartSelect: this.changeChartSelect
+      changeChartSelect: this.changeChartSelect,
+      needsConfirmation: false,
+      shouldShowCoinLimitModal: false,
+      closeCoinLimitModal: this.closeCoinLimitModal
     };
   }
 
@@ -95,11 +98,17 @@ class AppProvider extends Component {
     return Promise.all(promises);
   };
 
+  closeCoinLimitModal = () => {
+    this.setState({ shouldShowCoinLimitModal: false });
+  };
+
   addCoin = key => {
     let favorites = [...this.state.favorites];
     if (favorites.length < MAX_FAVORITES) {
       favorites.push(key);
-      this.setState({ favorites });
+      this.setState({ favorites, needsConfirmation: true });
+    } else {
+      this.setState({ shouldShowCoinLimitModal: true });
     }
   };
 
@@ -120,7 +129,8 @@ class AppProvider extends Component {
         page: 'dashboard',
         currentFavorite,
         prices: null,
-        historical: null
+        historical: null,
+        needsConfirmation: false
       },
       () => {
         this.fetchPrices();
@@ -156,7 +166,7 @@ class AppProvider extends Component {
   savedSettings = () => {
     let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
     if (!cryptoDashData) {
-      return { page: 'settings', firstVisit: true };
+      return { page: 'coins', firstVisit: true };
     }
     let { favorites, currentFavorite } = cryptoDashData;
     return { favorites, currentFavorite };

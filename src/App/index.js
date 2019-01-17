@@ -4,7 +4,7 @@ import './App.css';
 import AppLayout from './AppLayout';
 import AppBar from './AppBar';
 import AppProvider from './AppProvider';
-import Settings from '../Settings';
+import Coins from '../Coins';
 import Dashboard from '../Dashboard';
 import Content from '../Shared/Content';
 
@@ -15,7 +15,7 @@ class App extends Component {
         <AppProvider>
           <AppBar />
           <Content>
-            <Settings />
+            <Coins />
             <Dashboard />
           </Content>
         </AppProvider>

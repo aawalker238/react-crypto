@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 const CoinImage = styled.img`
   height: 50px;
+  justify-self: center;
   ${props =>
     props.spotlight &&
     css`
